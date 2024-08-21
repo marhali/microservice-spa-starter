@@ -10,6 +10,6 @@ insert_final_newline = true
 end_of_line = lf
 max_line_length = off
 
-[*.{java,kt}]
+[*.{java,kt,kts}]
 indent_style = tab
 indent_size = 4
