@@ -1,0 +1,46 @@
+server:
+  port: 8089
+  forward-headers-strategy: framework
+  servlet:
+    context-path: /auth
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  security:
+    user:
+      name: user
+      password: password
+    oauth2:
+      client:
+        registration:
+          github:
+            provider: github
+            client-id: {cipher}253f53d3b7f18a8b93fd1d0feddaa36164e090deac5e00a6d442e90a3d6f8dc29a9c3e00faea0377357fec9ed5dcf03e
+            client-secret: {cipher}093fd7b7caca15c38194cdc70b79ae173cd97ac358d698a482dfd1c02e3ed84680604b0a092e12f2f66e11b2cd04c092c9ba3cc9e26329d64359181c6597211b
+            scope: user:email, read:user
+            client-name: GitHub
+        provider:
+          github:
+            user-name-attribute: id
+      authorizationserver:
+        client:
+          gateway:
+            registration:
+              client-id: gateway-client
+              client-secret: {noop}gateway-secret
+              client-authentication-methods:
+                - client_secret_basic
+              authorization-grant-types:
+                - authorization_code
+                - refresh_token
+              redirect-uris:
+                - http://localhost:8080/api/login/oauth2/code/gateway
+                - http://localhost:5173/api/login/oauth2/code/gateway
+              post-logout-redirect-uris:
+                - http://localhost:8080/api/..
+                - http://localhost:5173/api/..
+              scopes:
+                - openid
+                - profile
