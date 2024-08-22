@@ -5,3 +5,6 @@ spring:
     name: config-service
   profiles:
     active: native
+management:
+  tracing:
+    enabled: false
