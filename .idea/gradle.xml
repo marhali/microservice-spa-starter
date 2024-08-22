@@ -9,6 +9,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/be-srv-config" />
+            <option value="$PROJECT_DIR$/be-srv-discovery" />
           </set>
         </option>
       </GradleProjectSettings>

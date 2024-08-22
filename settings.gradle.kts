@@ -9,3 +9,4 @@ pluginManagement {
 }
 
 include("be-srv-config")
+include("be-srv-discovery")
