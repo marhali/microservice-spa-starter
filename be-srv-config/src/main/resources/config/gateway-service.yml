@@ -1,0 +1,40 @@
+server:
+  port: 8080
+  forward-headers-strategy: framework
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+spring:
+  webflux:
+    base-path: /api
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: todo-service
+          uri: lb://todo-service
+          predicates:
+            - Path=/api/todo/**
+          filters:
+            - StripBasePath=1
+            - RewritePath=/todo/?(?<segment>.*), /$\{segment}
+            - TokenRelay=
+            - RemoveRequestHeader=Cookie
+  security:
+    oauth2:
+      client:
+        registration:
+          gateway:
+            provider: spring
+            client-id: gateway-client
+            client-secret: gateway-secret
+            authorization-grant-type: authorization_code
+            redirect-uri: {baseUrl}/login/oauth2/code/{registrationId}
+            scope: openid, profile
+            client-name: gateway
+        provider:
+          spring:
+            issuer-uri: http://localhost:8089/auth
