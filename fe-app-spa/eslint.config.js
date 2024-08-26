@@ -1,14 +1,14 @@
 import js from '@eslint/js';
 import globals from 'globals';
-import reactHooks from 'eslint-plugin-react-hooks';
-import reactRefresh from 'eslint-plugin-react-refresh';
+import eslintPluginReact from 'eslint-plugin-react';
+import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
+import eslintPluginReactRefresh from 'eslint-plugin-react-refresh';
+import eslintPluginJsxA11y from 'eslint-plugin-jsx-a11y';
 import tseslint from 'typescript-eslint';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import eslintPluginVitest from '@vitest/eslint-plugin';
 import eslintPluginTailwindcss from 'eslint-plugin-tailwindcss';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
-
-const ecmaVersion = 'latest';
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -16,20 +16,26 @@ export default tseslint.config(
     extends: [js.configs.recommended, ...tseslint.configs.recommendedTypeChecked],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
-      ecmaVersion,
       globals: globals.browser,
       parserOptions: {
-        ecmaVersion,
         project: ['tsconfig.json', 'tsconfig.app.json', 'tsconfig.node.json'],
         tsconfigRootDir: import.meta.dirname,
       },
     },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
     plugins: {
-      'react-hooks': reactHooks,
-      'react-refresh': reactRefresh,
+      'react': eslintPluginReact,
+      'react-hooks': eslintPluginReactHooks,
+      'react-refresh': eslintPluginReactRefresh,
     },
     rules: {
-      ...reactHooks.configs.recommended.rules,
+      ...eslintPluginReact.configs.recommended.rules,
+      ...eslintPluginReact.configs['jsx-runtime'].rules,
+      ...eslintPluginReactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
   },
@@ -43,6 +49,7 @@ export default tseslint.config(
     },
   },
   ...eslintPluginTailwindcss.configs['flat/recommended'],
+  eslintPluginJsxA11y.flatConfigs.recommended,
   eslintPluginUnicorn.configs['flat/recommended'],
   eslintPluginPrettierRecommended,
 );
