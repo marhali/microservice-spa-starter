@@ -25,32 +25,34 @@ allprojects {
 }
 
 subprojects {
-	apply(plugin = rootProject.libs.plugins.kotlin.spring.get().pluginId)
-	apply(plugin = rootProject.libs.plugins.spring.boot.get().pluginId)
-	apply(plugin = rootProject.libs.plugins.spring.dependency.management.get().pluginId)
+	if (project.name.startsWith("be-")) {
+		apply(plugin = rootProject.libs.plugins.kotlin.spring.get().pluginId)
+		apply(plugin = rootProject.libs.plugins.spring.boot.get().pluginId)
+		apply(plugin = rootProject.libs.plugins.spring.dependency.management.get().pluginId)
 
-	dependencies {
-		implementation(rootProject.libs.spring.boot.starter.actuator)
-		implementation(rootProject.libs.micrometer.tracing.bridge.otel)
-		implementation(rootProject.libs.opentelemetry.exporter.zipkin)
-		testImplementation(rootProject.libs.spring.boot.starter.test)
-		testImplementation(rootProject.libs.kotlin.test.junit5)
-		testRuntimeOnly(rootProject.libs.junit.platform.launcher)
-	}
-
-	dependencyManagement {
-		imports {
-			mavenBom(rootProject.libs.spring.cloud.dependencies.get().toString())
+		dependencies {
+			implementation(rootProject.libs.spring.boot.starter.actuator)
+			implementation(rootProject.libs.micrometer.tracing.bridge.otel)
+			implementation(rootProject.libs.opentelemetry.exporter.zipkin)
+			testImplementation(rootProject.libs.spring.boot.starter.test)
+			testImplementation(rootProject.libs.kotlin.test.junit5)
+			testRuntimeOnly(rootProject.libs.junit.platform.launcher)
 		}
-	}
 
-	kotlin {
-		compilerOptions {
-			freeCompilerArgs.addAll("-Xjsr305=strict")
+		dependencyManagement {
+			imports {
+				mavenBom(rootProject.libs.spring.cloud.dependencies.get().toString())
+			}
 		}
-	}
 
-	tasks.withType<Test> {
-		useJUnitPlatform()
+		kotlin {
+			compilerOptions {
+				freeCompilerArgs.addAll("-Xjsr305=strict")
+			}
+		}
+
+		tasks.withType<Test> {
+			useJUnitPlatform()
+		}
 	}
 }
