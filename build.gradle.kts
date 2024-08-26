@@ -3,6 +3,7 @@ plugins {
 	alias(libs.plugins.kotlin.spring)
 	alias(libs.plugins.spring.boot)
 	alias(libs.plugins.spring.dependency.management)
+	alias(libs.plugins.detekt)
 }
 
 allprojects {
@@ -29,6 +30,7 @@ subprojects {
 		apply(plugin = rootProject.libs.plugins.kotlin.spring.get().pluginId)
 		apply(plugin = rootProject.libs.plugins.spring.boot.get().pluginId)
 		apply(plugin = rootProject.libs.plugins.spring.dependency.management.get().pluginId)
+		apply(plugin = rootProject.libs.plugins.detekt.get().pluginId)
 
 		dependencies {
 			implementation(rootProject.libs.spring.boot.starter.actuator)
