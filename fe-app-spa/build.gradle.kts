@@ -21,7 +21,7 @@ if(packageJsonFile.exists()) {
 		val capitalizedScriptName = scriptName.replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
 
 		tasks.register<Exec>("${packageManager}Run${capitalizedScriptName}") {
-			group = "frontend"
+			group = "application"
 			description = "Runs the $packageManager script from ${packageJsonFile.name}"
 			workingDir = frontendDir
 			commandLine(packageManager, scriptName)
