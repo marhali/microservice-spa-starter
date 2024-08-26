@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$/be-srv-discovery" />
             <option value="$PROJECT_DIR$/be-srv-gateway" />
             <option value="$PROJECT_DIR$/be-srv-todo" />
+            <option value="$PROJECT_DIR$/fe-app-spa" />
           </set>
         </option>
       </GradleProjectSettings>
