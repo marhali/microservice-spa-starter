@@ -34,8 +34,7 @@ subprojects {
 
 		dependencies {
 			implementation(rootProject.libs.spring.boot.starter.actuator)
-			implementation(rootProject.libs.micrometer.tracing.bridge.otel)
-			implementation(rootProject.libs.opentelemetry.exporter.zipkin)
+			implementation(rootProject.libs.apm.agent.attach)
 			testImplementation(rootProject.libs.spring.boot.starter.test)
 			testImplementation(rootProject.libs.kotlin.test.junit5)
 			testRuntimeOnly(rootProject.libs.junit.platform.launcher)

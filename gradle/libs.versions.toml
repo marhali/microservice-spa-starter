@@ -9,6 +9,7 @@ spring-boot = "3.4.0-SNAPSHOT"
 spring-dependency-management = "1.1.6"
 springdoc-openapi = "2.6.0"
 detekt = "1.23.6"
+apm-agent-attach = "1.51.0"
 
 [libraries]
 spring-boot-starter-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator" }
@@ -31,6 +32,7 @@ micrometer-tracing-bridge-otel = { group = "io.micrometer", name = "micrometer-t
 opentelemetry-exporter-zipkin = { group = "io.opentelemetry", name = "opentelemetry-exporter-zipkin" }
 junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher" }
 kotlin-test-junit5 = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit5" }
+apm-agent-attach = { group = "co.elastic.apm", name = "apm-agent-attach", version.ref = "apm-agent-attach" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }

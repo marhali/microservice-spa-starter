@@ -87,3 +87,27 @@ services:
       interval: 10s
       timeout: 10s
       retries: 1
+  apm:
+    image: elastic/apm-server:8.15.0
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+      elasticsearch-init:
+        condition: service_completed_successfully
+    ports:
+      - "8200:8200"
+    volumes:
+      - ./data/certs/ca:/usr/share/apm-server/config/certs/ca
+      - ./setup/elastic-apm/apm-server.yml:/usr/share/apm-server/apm-server.yml:ro
+    cap_drop:
+      - ALL
+    cap_add:
+      - CHOWN
+      - DAC_OVERRIDE
+      - SETGID
+      - SETUID
+    healthcheck:
+      test: ["CMD", "curl", "--write-out", "'HTTP %{http_code}'", "--silent", "--output", "/dev/null", "http://localhost:8200/healthcheck"]
+      interval: 10s
+      timeout: 10s
+      retries: 120
