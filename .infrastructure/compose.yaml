@@ -32,7 +32,7 @@ services:
       - xpack.security.transport.ssl.verification_mode=certificate
       - xpack.license.self_generated.type=basic
     ports:
-      - 9200:9200
+      - "9200:9200"
     volumes:
       - ./data/certs/ca:/usr/share/elasticsearch/config/certs/ca
       - ./data/certs/elasticsearch:/usr/share/elasticsearch/config/certs/elasticsearch
@@ -76,7 +76,7 @@ services:
       - SERVER_SSL_KEY=config/certs/kibana/client.key
       - SERVER_SSL_CERTIFICATE=config/certs/kibana/client.crt
     ports:
-      - 5601:5601
+      - "5601:5601"
     volumes:
       - ./data/certs/ca:/usr/share/kibana/config/certs/ca
       - ./data/certs/kibana:/usr/share/kibana/config/certs/kibana
