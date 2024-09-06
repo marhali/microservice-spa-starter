@@ -1,0 +1,15 @@
+apm-server:
+  host: "0.0.0.0:8200"
+  ssl:
+    enabled: true
+    certificate: "config/certs/apm-server/client.crt"
+    key: "config/certs/apm-server/client.key"
+output:
+  elasticsearch:
+    hosts: ["elasticsearch:9200"]
+    protocol: "https"
+    username: "elastic"
+    password: "elastic"
+    ssl:
+      enabled: true
+      certificate_authorities: ["config/certs/ca/ca.crt"]

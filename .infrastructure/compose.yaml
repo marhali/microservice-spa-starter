@@ -9,7 +9,7 @@ services:
       - ./data/certs:/certs
     environment:
       - CA=microservice-spa-starter.local
-      - CLIENTS=elasticsearch,kibana
+      - CLIENTS=elasticsearch,kibana,apm-server
   elasticsearch:
     image: elasticsearch:8.15.0
     depends_on:
@@ -34,8 +34,8 @@ services:
     ports:
       - "9200:9200"
     volumes:
-      - ./data/certs/ca:/usr/share/elasticsearch/config/certs/ca
-      - ./data/certs/elasticsearch:/usr/share/elasticsearch/config/certs/elasticsearch
+      - ./data/certs/ca:/usr/share/elasticsearch/config/certs/ca:ro
+      - ./data/certs/elasticsearch:/usr/share/elasticsearch/config/certs/elasticsearch:ro
       - ./data/elasticsearch:/usr/share/elasticsearch/data
     mem_limit: 1073741824
     ulimits:
@@ -56,7 +56,7 @@ services:
       - KIBANA_PASSWORD=kibana
     image: elasticsearch:8.15.0
     volumes:
-      - ./data/certs/ca:/usr/share/elasticsearch/config/certs/ca
+      - ./data/certs/ca:/usr/share/elasticsearch/config/certs/ca:ro
       - ./setup/elasticsearch/elasticsearch.setup.sh:/usr/share/elasticsearch/elasticsearch.setup.sh
     command: [ "sh", "./elasticsearch.setup.sh" ]
   kibana:
@@ -78,8 +78,8 @@ services:
     ports:
       - "5601:5601"
     volumes:
-      - ./data/certs/ca:/usr/share/kibana/config/certs/ca
-      - ./data/certs/kibana:/usr/share/kibana/config/certs/kibana
+      - ./data/certs/ca:/usr/share/kibana/config/certs/ca:ro
+      - ./data/certs/kibana:/usr/share/kibana/config/certs/kibana:ro
       - ./data/kibana:/usr/share/kibana/data
     mem_limit: 1073741824
     healthcheck:
@@ -87,7 +87,7 @@ services:
       interval: 10s
       timeout: 10s
       retries: 1
-  apm:
+  apm-server:
     image: elastic/apm-server:8.15.0
     depends_on:
       elasticsearch:
@@ -97,8 +97,9 @@ services:
     ports:
       - "8200:8200"
     volumes:
-      - ./data/certs/ca:/usr/share/apm-server/config/certs/ca
-      - ./setup/elastic-apm/apm-server.yml:/usr/share/apm-server/apm-server.yml:ro
+      - ./data/certs/ca:/usr/share/apm-server/config/certs/ca:ro
+      - ./data/certs/apm-server:/usr/share/apm-server/config/certs/apm-server:ro
+      - ./setup/apm-server/apm-server.yml:/usr/share/apm-server/apm-server.yml:ro
     cap_drop:
       - ALL
     cap_add:
@@ -107,7 +108,7 @@ services:
       - SETGID
       - SETUID
     healthcheck:
-      test: ["CMD", "curl", "--write-out", "'HTTP %{http_code}'", "--silent", "--output", "/dev/null", "http://localhost:8200/healthcheck"]
+      test: ["CMD", "curl --write-out 'HTTP %{http_code}' --silent --output /dev/null --cacert config/certs/ca/ca.crt https://localhost:8200/healthcheck"]
       interval: 10s
       timeout: 10s
       retries: 120
