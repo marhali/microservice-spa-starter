@@ -24,6 +24,8 @@ All services persist their data under the [./data](./data) folder.
 ### certs-setup
 Creates a local CA with signed client certificates. Certificates can be found under [./data/certs](./data/certs/).
 
+The CA should be added to trusted Root-CA's for seamless integration.
+
 ### elasticsearch
 
 ### kibana
