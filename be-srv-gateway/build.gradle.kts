@@ -1,4 +1,5 @@
 dependencies {
+	implementation(project(":be-shared"))
 	implementation(libs.spring.boot.starter.oauth2.client)
 	implementation(libs.spring.cloud.starter.config)
 	implementation(libs.spring.cloud.starter.gateway)
