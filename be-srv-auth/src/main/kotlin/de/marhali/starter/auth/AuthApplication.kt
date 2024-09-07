@@ -1,6 +1,6 @@
 package de.marhali.starter.auth
 
-import de.marhali.starter.shared.runBootstrap
+import de.marhali.starter.core.runBeforeApplication
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Info
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -16,6 +16,6 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient
 class AuthApplication
 
 fun main(args: Array<String>) {
-	runBootstrap()
+	runBeforeApplication()
 	runApplication<AuthApplication>(*args)
 }

@@ -1,6 +1,6 @@
 package de.marhali.starter.todo
 
-import de.marhali.starter.shared.runBootstrap
+import de.marhali.starter.core.runBeforeApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
@@ -8,6 +8,6 @@ import org.springframework.boot.runApplication
 class TodoApplication
 
 fun main(args: Array<String>) {
-	runBootstrap()
+	runBeforeApplication()
 	runApplication<TodoApplication>(*args)
 }

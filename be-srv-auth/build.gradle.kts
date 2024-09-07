@@ -1,5 +1,5 @@
 dependencies {
-	implementation(project(":be-shared"))
+	implementation(project(":be-core"))
 	implementation(libs.spring.boot.starter.web)
 	implementation(libs.spring.boot.starter.security)
 	implementation(libs.spring.boot.starter.oauth2.client)

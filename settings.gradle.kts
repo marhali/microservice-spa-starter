@@ -9,7 +9,7 @@ pluginManagement {
 	}
 }
 
-include("be-shared")
+include("be-core")
 include("be-srv-config")
 include("be-srv-discovery")
 include("be-srv-auth")

@@ -8,7 +8,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/be-shared" />
+            <option value="$PROJECT_DIR$/be-core" />
             <option value="$PROJECT_DIR$/be-srv-auth" />
             <option value="$PROJECT_DIR$/be-srv-config" />
             <option value="$PROJECT_DIR$/be-srv-discovery" />
