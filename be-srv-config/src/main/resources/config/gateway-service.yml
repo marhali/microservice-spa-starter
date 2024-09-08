@@ -38,3 +38,6 @@ spring:
         provider:
           spring:
             issuer-uri: http://localhost:8089/auth
+  devtools:
+    restart:
+      additional-paths: .,../../../../be-srv-config/src/main/resources/config/gateway-service.yml

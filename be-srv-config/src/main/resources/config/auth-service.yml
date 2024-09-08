@@ -44,3 +44,6 @@ spring:
               scopes:
                 - openid
                 - profile
+  devtools:
+    restart:
+      additional-paths: .,../../../../be-srv-config/src/main/resources/config/auth-service.yml
