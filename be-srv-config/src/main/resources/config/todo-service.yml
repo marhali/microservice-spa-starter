@@ -12,5 +12,7 @@ spring:
         jwt:
           issuer-uri: http://localhost:8089/auth
   devtools:
+    livereload:
+      enabled: false
     restart:
-      additional-paths: .,../../../../be-srv-config/src/main/resources/config/todo-service.yml
+      additional-paths: be-srv-config/build/resources/main/config/

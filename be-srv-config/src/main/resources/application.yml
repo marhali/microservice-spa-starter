@@ -6,5 +6,5 @@ spring:
   profiles:
     active: native
   devtools:
-    restart:
-      additional-paths: .
+    livereload:
+      enabled: false

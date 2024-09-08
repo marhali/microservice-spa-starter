@@ -45,5 +45,7 @@ spring:
                 - openid
                 - profile
   devtools:
+    livereload:
+      enabled: false
     restart:
-      additional-paths: .,../../../../be-srv-config/src/main/resources/config/auth-service.yml
+      additional-paths: be-srv-config/build/resources/main/config/

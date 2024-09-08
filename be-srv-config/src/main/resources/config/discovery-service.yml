@@ -10,5 +10,7 @@ eureka:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 spring:
   devtools:
+    livereload:
+      enabled: false
     restart:
-      additional-paths: .,../../../../be-srv-config/src/main/resources/config/discovery-service.yml
+      additional-paths: be-srv-config/build/resources/main/config/
