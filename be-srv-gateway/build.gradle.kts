@@ -1,3 +1,9 @@
+plugins {
+	id("kotlin-conventions")
+	id("testing-conventions")
+	id("spring-conventions")
+}
+
 dependencies {
 	implementation(project(":be-core"))
 	implementation(libs.spring.boot.starter.oauth2.client)
