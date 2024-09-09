@@ -7,6 +7,9 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+logging:
+  level:
+    org.springframework.security: trace
 spring:
   security:
     user:
@@ -29,7 +32,7 @@ spring:
           gateway:
             registration:
               client-id: gateway-client
-              client-secret: '{noop}gateway-secret1'
+              client-secret: '{noop}gateway-secret'
               client-authentication-methods:
                 - client_secret_basic
               authorization-grant-types:
