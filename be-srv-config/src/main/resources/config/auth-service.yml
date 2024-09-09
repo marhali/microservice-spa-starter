@@ -10,7 +10,7 @@ eureka:
 spring:
   security:
     user:
-      name: user
+      name: username
       password: password
     oauth2:
       client:
