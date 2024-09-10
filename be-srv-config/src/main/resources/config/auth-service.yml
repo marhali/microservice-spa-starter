@@ -20,8 +20,8 @@ spring:
         registration:
           github:
             provider: github
-            client-id: '{cipher}253f53d3b7f18a8b93fd1d0feddaa36164e090deac5e00a6d442e90a3d6f8dc29a9c3e00faea0377357fec9ed5dcf03e'
-            client-secret: '{cipher}093fd7b7caca15c38194cdc70b79ae173cd97ac358d698a482dfd1c02e3ed84680604b0a092e12f2f66e11b2cd04c092c9ba3cc9e26329d64359181c6597211b'
+            client-id: '{cipher}f45df2b9a37672133e1df7f8d5362133c7a78a92db652050bc69555e9145c7743b00d874b676f4c571b73c403625a4a1'
+            client-secret: '{cipher}e67735f0df60b8fe1872e51b4f72c11440063eae2355d79b7bcd8d4903e0f5f449500958c00833c6e307586d85cbe3720f0586075f7404f23b5bf18871e41a3b'
             scope: user:email, read:user
             client-name: GitHub
         provider:
