@@ -14,5 +14,3 @@ spring:
   devtools:
     livereload:
       enabled: false
-    restart:
-      additional-paths: be-srv-config/build/resources/main/config/
