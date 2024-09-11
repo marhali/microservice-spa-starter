@@ -5,6 +5,9 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+logging:
+  level:
+    org.springframework.security: trace
 spring:
   webflux:
     base-path: /api
