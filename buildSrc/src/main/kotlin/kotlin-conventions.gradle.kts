@@ -1,3 +1,5 @@
+import gradle.kotlin.dsl.accessors._4a6bac2b1eb1fdd946649436616362ab.implementation
+
 plugins {
 	id("java-conventions")
 	kotlin("jvm")
@@ -13,6 +15,10 @@ kotlin {
 	compilerOptions {
 		freeCompilerArgs.addAll("-Xjsr305=strict")
 	}
+}
+
+dependencies {
+	implementation(libs.findLibrary("kotlin-reflect").get())
 }
 
 detekt {

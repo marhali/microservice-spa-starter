@@ -28,6 +28,7 @@ springdoc-openapi-starter-webmvc-api = { group = "org.springdoc", name = "spring
 springdoc-openapi-starter-webflux-api = { group = "org.springdoc", name = "springdoc-openapi-starter-webflux-api", version.ref = "springdoc-openapi" }
 springdoc-openapi-starter-webflux-ui = { group = "org.springdoc", name = "springdoc-openapi-starter-webflux-ui", version.ref = "springdoc-openapi" }
 junit-platform-launcher = { group = "org.junit.platform", name = "junit-platform-launcher" }
+kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect", version.ref = "kotlin" }
 kotlin-test-junit5 = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit5" }
 apm-agent-attach = { group = "co.elastic.apm", name = "apm-agent-attach", version.ref = "apm-agent-attach" }
 
