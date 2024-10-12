@@ -1,6 +1,5 @@
 package de.marhali.starter.gateway
 
-import de.marhali.starter.core.runBeforeApplication
 import io.swagger.v3.oas.annotations.OpenAPIDefinition
 import io.swagger.v3.oas.annotations.info.Info
 import org.springframework.boot.autoconfigure.SpringBootApplication
@@ -16,6 +15,5 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient
 class GatewayApplication
 
 fun main(args: Array<String>) {
-	runBeforeApplication()
 	runApplication<GatewayApplication>(*args)
 }

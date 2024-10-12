@@ -13,7 +13,8 @@ apply(plugin = "io.spring.dependency-management")
 dependencies {
 	implementation(platform(libs.findLibrary("spring-cloud-dependencies").get()))
 	implementation(libs.findLibrary("spring-boot-starter-actuator").get())
-	implementation(libs.findLibrary("apm-agent-attach").get())
+	implementation(libs.findLibrary("micrometer-tracing-bridge-otel").get())
+	implementation(libs.findLibrary("opentelemetry-instrumentation-annotations").get())
 	developmentOnly(libs.findLibrary("spring-boot-devtools").get())
 	testImplementation(libs.findLibrary("spring-boot-starter-test").get())
 }
