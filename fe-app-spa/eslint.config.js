@@ -9,6 +9,7 @@ import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import eslintPluginVitest from '@vitest/eslint-plugin';
 import eslintPluginTailwindcss from 'eslint-plugin-tailwindcss';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import eslintPluginImport from 'eslint-plugin-import';
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -31,12 +32,19 @@ export default tseslint.config(
       'react': eslintPluginReact,
       'react-hooks': eslintPluginReactHooks,
       'react-refresh': eslintPluginReactRefresh,
+      'import': eslintPluginImport,
     },
     rules: {
       ...eslintPluginReact.configs.recommended.rules,
       ...eslintPluginReact.configs['jsx-runtime'].rules,
       ...eslintPluginReactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'import/order': [
+        'error',
+        {
+          groups: ['index', 'sibling', 'parent', 'internal', 'external', 'builtin', 'object', 'type'],
+        },
+      ],
     },
   },
   {
