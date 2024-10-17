@@ -16,6 +16,11 @@ export default defineConfig({
         target: 'http://localhost:8080',
         xfwd: true,
       },
+      '/trace': {
+        target: 'https://localhost:8200',
+        rewrite: (path) => path.slice(6),
+        secure: false,
+      },
     },
   },
 });
