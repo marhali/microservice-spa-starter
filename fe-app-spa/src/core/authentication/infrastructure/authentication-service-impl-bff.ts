@@ -2,31 +2,31 @@ import { AuthenticationService } from '@/core/authentication/domain/authenticati
 import { AuthenticationState } from '@/core/authentication/domain/authentication.ts';
 import { Listener, PubSub, TeardownFunction } from '@/core/reactive/domain/pub-sub.ts';
 import PubSubImpl from '@/core/reactive/domain/pub-sub-impl.ts';
+import { apiClient } from '@/core/api/infrastructure/api-client-impl-fetch.ts';
+import ApiRoutes from '@/core/api/domain/api-routes.ts';
 
 class AuthenticationServiceImplBff implements AuthenticationService {
   private readonly pubsub: PubSub<AuthenticationState>;
+  private initialized?: boolean;
   private state?: AuthenticationState;
 
   constructor() {
     this.pubsub = new PubSubImpl();
   }
 
-  getState(): AuthenticationState {
-    return this.getOrThrowState();
+  getState(): AuthenticationState | undefined {
+    return this.state;
   }
 
-  initialize(): Promise<void> {
-    const decodedCookies = decodeURIComponent(document.cookie).split(';');
-
-    const isAuthenticatedCookie = decodedCookies.find((cook) => cook.trim().startsWith('isAuthenticated='));
-    const isAuthenticatedCookieValue = isAuthenticatedCookie?.split('=')?.[1];
-    const isAuthenticated = isAuthenticatedCookieValue ? Boolean(JSON.parse(isAuthenticatedCookieValue)) : false;
-
-    this.state = {
-      isAuthenticated,
-    };
-
-    return Promise.resolve();
+  async initialize(): Promise<void> {
+    try {
+      const response = await apiClient.get(ApiRoutes.CHECK_SESSION());
+      this.state = response.ok ? ((await response.json()) as AuthenticationState) : undefined;
+    } catch {
+      this.state = undefined;
+    } finally {
+      this.initialized = true;
+    }
   }
 
   subscribe(listener: Listener<AuthenticationState>): TeardownFunction {
@@ -34,15 +34,7 @@ class AuthenticationServiceImplBff implements AuthenticationService {
   }
 
   isInitialized(): boolean {
-    return !!this.state;
-  }
-
-  private getOrThrowState(): AuthenticationState {
-    if (!this.state) {
-      throw new Error('AuthenticationService is not initialized');
-    }
-
-    return this.state;
+    return !!this.initialized;
   }
 }
 

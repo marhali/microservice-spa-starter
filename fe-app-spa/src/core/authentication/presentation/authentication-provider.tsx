@@ -19,7 +19,7 @@ function AuthenticationProvider(properties: Readonly<AuthenticationProviderPrope
     () => authenticationService.getState(),
   );
 
-  if (state.isAuthenticated) {
+  if (state) {
     return <AuthenticationContext.Provider value={state}>{children}</AuthenticationContext.Provider>;
   }
 

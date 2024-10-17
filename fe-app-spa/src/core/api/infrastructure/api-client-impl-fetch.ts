@@ -1,15 +1,19 @@
 import { ApiClient } from '@/core/api/domain/api-client.ts';
 
-class ApiClientImplFetch implements ApiClient {
-  private static readonly DEFAULT_HEADERS = {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-  };
+const DEFAULT_HEADERS = {
+  'X-Requested-With': 'XMLHttpRequest',
+  'Accept': 'application/json',
+};
 
+const PAYLOAD_HEADERS = {
+  'Content-Type': 'application/json',
+};
+
+class ApiClientImplFetch implements ApiClient {
   get(url: string): Promise<Response> {
     return fetch(url, {
       method: 'GET',
-      headers: { ...ApiClientImplFetch.DEFAULT_HEADERS },
+      headers: { ...DEFAULT_HEADERS },
       redirect: 'error',
     });
   }
@@ -17,7 +21,7 @@ class ApiClientImplFetch implements ApiClient {
   post<Payload>(url: string, payload?: Payload): Promise<Response> {
     return fetch(url, {
       method: 'POST',
-      headers: { ...ApiClientImplFetch.DEFAULT_HEADERS, ...this.getCsrfHeaders() },
+      headers: { ...DEFAULT_HEADERS, ...(payload ? PAYLOAD_HEADERS : undefined) },
       body: payload ? JSON.stringify(payload) : undefined,
       redirect: 'error',
     });
@@ -26,7 +30,7 @@ class ApiClientImplFetch implements ApiClient {
   put<Payload>(url: string, payload?: Payload): Promise<Response> {
     return fetch(url, {
       method: 'PUT',
-      headers: { ...ApiClientImplFetch.DEFAULT_HEADERS, ...this.getCsrfHeaders() },
+      headers: { ...DEFAULT_HEADERS, ...(payload ? PAYLOAD_HEADERS : undefined) },
       body: payload ? JSON.stringify(payload) : undefined,
       redirect: 'error',
     });
@@ -35,16 +39,10 @@ class ApiClientImplFetch implements ApiClient {
   delete<Payload>(url: string, payload?: Payload): Promise<Response> {
     return fetch(url, {
       method: 'DELETE',
-      headers: { ...ApiClientImplFetch.DEFAULT_HEADERS, ...this.getCsrfHeaders() },
+      headers: { ...DEFAULT_HEADERS, ...(payload ? PAYLOAD_HEADERS : undefined) },
       body: payload ? JSON.stringify(payload) : undefined,
       redirect: 'error',
     });
-  }
-
-  private getCsrfHeaders() {
-    return {
-      'X-Xsrf-Token': document.cookie.match(new RegExp('(^| )XSRF-TOKEN=([^;]+)'))?.[2] ?? '',
-    };
   }
 }
 

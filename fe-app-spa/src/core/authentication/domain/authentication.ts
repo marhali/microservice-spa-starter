@@ -1,3 +1,7 @@
 export type AuthenticationState = {
-  isAuthenticated: boolean;
+  userId: string;
+  username: string;
+  roles: string[];
+  iat: string;
+  exp: string;
 };
