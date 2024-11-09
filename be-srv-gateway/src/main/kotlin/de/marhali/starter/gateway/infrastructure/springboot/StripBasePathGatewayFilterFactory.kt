@@ -11,6 +11,7 @@ import org.springframework.web.server.ServerWebExchange
 import java.util.*
 import java.util.stream.Collectors
 
+// See https://github.com/spring-cloud/spring-cloud-gateway/issues/1759
 @Component
 class StripBasePathGatewayFilterFactory(
 	private val webFluxProperties: WebFluxProperties
